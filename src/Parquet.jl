@@ -34,7 +34,8 @@ import Base: show, open, close, values, eltype, length
 export is_par_file, show, nrows, ncols, rowgroups, columns, pages, bytes, values, colname, colnames
 export schema
 export logical_timestamp, logical_string
-export RecordCursor, BatchedColumnsCursor
+export RecordCursor, BatchedColumnsCursor, ColCursor
+export setrow, colcursor_advance, colcursor_values
 export write_parquet, read_parquet
 
 # package code goes here
