@@ -41,7 +41,7 @@ function MASKN(nbits::UInt8, ::Type{T}) where {T}
 end
 
 #read_fixed(io::IO, typ::Type{UInt32}) = _read_fixed(io, convert(UInt32,0), 4)
-#read_fixed(io::IO, typ::Type{UInt64}) = _read_fixed(io, convert(UInt64,0), 8)
+read_fixed(io::IO, typ::Type{UInt64}) = _read_fixed(io, convert(UInt64,0), 8)
 read_fixed(io::IO, typ::Type{Int32}) = reinterpret(Int32, _read_fixed(io, convert(UInt32,0), 4))
 #read_fixed(io::IO, typ::Type{Int64}) = reinterpret(Int64, _read_fixed(io, convert(UInt64,0), 8))
 #read_fixed(io::IO, typ::Type{Int128}) = reinterpret(Int128, _read_fixed(io, convert(UInt128, 0), 12))   # INT96: 12 bytes little endian
@@ -162,7 +162,7 @@ function read_plain_values(inp::InputState, out::OutputState{Vector{UInt8}}, cou
     out.offset += count
     nothing
 end
-function read_plain_values(inp::InputState, out::OutputState{T}, count::Int32, converter_fn::Function, storage_type::Int32) where T <: Union{Decimal,Float64,Int16,Int32,Int64,Int128}
+function read_plain_values(inp::InputState, out::OutputState{T}, count::Int32, converter_fn::Function, storage_type::Int32) where T <: Union{Decimal,Float64,Int16,Int32,Int64,Int128,UInt64}
     arr = out.data
     offset = out.offset
     @assert (offset + count) <= length(arr)
